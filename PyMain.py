@@ -1,29 +1,50 @@
 import pygame as pg
-import  sys
+from Bird import *
+from Ground import *
+from Pipes import *
+import sys
+
 
 class Game:
 
     def __init__(self):
-
         pg.init()
 
-        self.width = 200
-        self.height = 100
-        self.FPS = 60
-        self.screen = pg.display.set_mode((self.width,self.height))
+        self.screen = pg.display.set_mode((width,height))
+
+        self.background_image = BACKGROUND_IMAGE
+        self.background = pg.transform.scale(self.background_image,(width,height))
 
         pg.display.set_caption("2D Shooter")
         self.clock = pg.time.Clock()
+
+        self.Pressing_Space = False
+
+        self.bird = Bird(self)
+        self.ground = Ground(self)
+        self.pipes = Pipe(self)
+
 
     def run(self):
         while True:
 
             for event in pg.event.get():
-                    if event.type == pg.QUIT:
-                        pg.quit()
-                        sys.exit()
+
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
+
+
+            self.screen.blit(self.background,(0,0))
+
+            self.bird.update()
+            self.ground.update()
+            self.pipes.update()
+
             pg.display.update()
-            self.clock.tick(60)
+            self.clock.tick(FPS)
+
+
 
 
 game = Game()
