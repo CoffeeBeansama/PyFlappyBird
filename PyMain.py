@@ -18,7 +18,9 @@ class Game:
         pg.display.set_caption("2D Shooter")
         self.clock = pg.time.Clock()
 
-        self.Pressing_Space = False
+
+        self.spawnPipe = pg.USEREVENT
+        pg.time.set_timer(self.spawnPipe, 1200)
 
         self.bird = Bird(self)
         self.ground = Ground(self)
@@ -33,6 +35,9 @@ class Game:
                 if event.type == pg.QUIT:
                     pg.quit()
                     sys.exit()
+
+                if event.type == self.spawnPipe:
+                    self.SpawnPipe = True
 
 
             self.screen.blit(self.background,(0,0))

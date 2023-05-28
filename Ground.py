@@ -21,7 +21,7 @@ class Ground(Entity):
         self.screen.blit(self.ground, (self.x, self.y))
         self.screen.blit(self.ground, (self.x + width, self.y))
 
-        if self.x <= -350:
+        if self.x <= -width:
             self.x = 0
 
     def update(self):

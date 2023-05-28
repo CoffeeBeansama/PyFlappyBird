@@ -11,7 +11,6 @@ class Bird(Entity):
         self.flapForce = 20
         self.x = 150
 
-        self.Flap_Wings = game.Pressing_Space
         self.image = BIRD_IMAGE
         self.bird = pg.transform.scale(self.image,(32,32))
 
