@@ -13,9 +13,14 @@ class Game:
         self.screen = pg.display.set_mode((width,height))
 
         self.background_image = BACKGROUND_IMAGE
-        self.background = pg.transform.scale(self.background_image,(width,height))
+        self.gameOverImage = GAMEOVER
+        self.replayImage = REPLAY
 
-        pg.display.set_caption("2D Shooter")
+        self.background = pg.transform.scale(self.background_image,(width,height))
+        self.gameOverFrame = pg.transform.scale2x(self.gameOverImage)
+        self.replayButton = pg.transform.scale2x(self.replayImage)
+
+        pg.display.set_caption("Flappy Bird")
         self.clock = pg.time.Clock()
 
 
@@ -26,25 +31,42 @@ class Game:
         self.ground = Ground(self)
         self.pipes = Pipe(self)
 
+        self.GameRunning = True
+
+    def resetGame(self):
+        self.pipes.clearPipes()
+        self.bird.resetPosition()
+        self.GameRunning = True
 
     def run(self):
+        pos = pg.mouse.get_pos()
         while True:
 
             for event in pg.event.get():
+
+                keys = pg.key.get_pressed()
 
                 if event.type == pg.QUIT:
                     pg.quit()
                     sys.exit()
 
                 if event.type == self.spawnPipe:
-                    self.SpawnPipe = True
+                    self.pipes.addPipe()
+
+                if keys[pg.K_SPACE] and not self.GameRunning:
+                    self.resetGame()
 
 
             self.screen.blit(self.background,(0,0))
 
-            self.bird.update()
-            self.ground.update()
-            self.pipes.update()
+            if self.GameRunning:
+                self.bird.update()
+                self.ground.update()
+                self.pipes.update()
+            else:
+                self.screen.blit(self.gameOverFrame,(80,100))
+                self.screen.blit(self.replayButton,(120,200))
+
 
             pg.display.update()
             self.clock.tick(FPS)

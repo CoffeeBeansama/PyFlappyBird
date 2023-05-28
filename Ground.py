@@ -11,12 +11,12 @@ class Ground(Entity):
 
         self.x = 0
         self.y = 400
-        self.movementSpeed = 1
+        self.groundSpeed = 3
 
         self.screen = game.screen
 
     def movement(self):
-        self.x -= self.movementSpeed
+        self.x -= self.groundSpeed
 
         self.screen.blit(self.ground, (self.x, self.y))
         self.screen.blit(self.ground, (self.x + width, self.y))
