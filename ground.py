@@ -1,6 +1,6 @@
 import pygame as pg
-from Entities import Entity
-from Settings import *
+from entities import Entity
+from settings import *
 
 class Ground(Entity):
     def __init__(self,game):

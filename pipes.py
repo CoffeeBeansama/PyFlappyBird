@@ -1,12 +1,11 @@
 import pygame as pg
 import random
-from Entities import Entity
-from Settings import *
+from entities import Entity
+from settings import *
 
 class Pipe(Entity):
 
     def __init__(self,game):
-
         self.x = 350
         self.y = 0
         self.pipe_speed = 3
@@ -37,7 +36,6 @@ class Pipe(Entity):
 
     def createPipes(self):
         self.y = random.randint(-50,100)
-
         top_pipe = self.pipe_up.get_rect(midbottom=(self.x,self.y + 100))
         bottom_pipe = self.pipe_up.get_rect(midtop=(self.x,self.y + 250))
         return top_pipe, bottom_pipe
@@ -46,7 +44,6 @@ class Pipe(Entity):
     def movement(self,pipes):
         for pipe in pipes:
             pipe.x -= self.pipe_speed
-
         return pipes
 
     def draw_pipes(self,pipes):
@@ -55,14 +52,10 @@ class Pipe(Entity):
             self.screen.blit(self.pipe_down, pipe)
 
     def scoredPiped(self,pipes):
-
         playerScored = pg.mixer.Sound(self.score_sfx)
         for pipe in pipes:
             if pipe.x < self.game.bird.x:
                 pass
-
-
-
 
     def update(self):
         self.pipesActive = self.movement(self.pipesActive)

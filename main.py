@@ -1,12 +1,10 @@
 import pygame as pg
-from Bird import *
-from Ground import *
-from Pipes import *
+from bird import *
+from ground import *
+from pipes import *
 import sys
 
-
 class Game:
-
     def __init__(self):
         pg.init()
 
@@ -22,7 +20,6 @@ class Game:
 
         pg.display.set_caption("Flappy Bird")
         self.clock = pg.time.Clock()
-
 
         self.spawnPipe = pg.USEREVENT
         pg.time.set_timer(self.spawnPipe, 1200)
@@ -56,7 +53,6 @@ class Game:
                 if keys[pg.K_SPACE] and not self.GameRunning:
                     self.resetGame()
 
-
             self.screen.blit(self.background,(0,0))
 
             if self.GameRunning:
@@ -67,11 +63,8 @@ class Game:
                 self.screen.blit(self.gameOverFrame,(80,100))
                 self.screen.blit(self.replayButton,(120,200))
 
-
             pg.display.update()
             self.clock.tick(FPS)
-
-
 
 
 game = Game()

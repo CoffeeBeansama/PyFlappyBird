@@ -1,6 +1,6 @@
 import pygame as pg
-from Entities import Entity
-from Settings import *
+from entities import Entity
+from settings import *
 
 
 class Bird(Entity):
@@ -38,25 +38,9 @@ class Bird(Entity):
         if keys[pg.K_SPACE]:
             self.rect.centery -= self.flapForce
 
-            #if not pg.mixer.Sound.play(flysound):
-                #pg.mixer.Sound.playOnce(flysound)
-
-
-
-
-
         if self.game.GameRunning:
             self.rect.centery += self.gravity
             self.screen.blit(self.bird, (self.x, self.rect.centery))
-
-
-
-
-
-
-
-
-
 
     def update(self):
         self.movement()
